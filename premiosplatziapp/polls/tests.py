@@ -42,7 +42,7 @@ def create_question(question_text,days):
 class QuestionIndexViewTest(TestCase):
     def test_no_questions(self):
         """ si no existe nunguna pregunta en BD vamos a poner un mensaje apropiado """
-        response = self.client.get(reverse("polls:index"))
+        response = self.client.get(reverse("polls:index")) # reverse = url
         self.assertEqual(response.status_code,200)
         self.assertContains(response, "No polls are available.")
         self.assertQuerysetEqual(response.context["latest_question_list"],[])
@@ -105,7 +105,7 @@ class QuestionDeatilViewTest(TestCase):
     
     def test_future_Question(self):
         """
-            the detail view of a question quth a pub_date in the future
+            the detail view of a question with a pub_date in the future
             returns a 404 error not dount
         """
         future_question = create_question(question_text="future question", days=30)
